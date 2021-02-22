@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Table, Button } from 'react-bootstrap';
 import { excludesRow, toggleForm } from '../actions';
 
 class WalletTable extends React.Component {
@@ -37,47 +38,54 @@ class WalletTable extends React.Component {
     const { expensesState } = this.props;
     return (
       <div>
-        <table>
-          <tr>
-            <th>Descrição</th>
-            <th>Tag</th>
-            <th>Método de pagamento</th>
-            <th>Valor</th>
-            <th>Moeda</th>
-            <th>Câmbio utilizado</th>
-            <th>Valor convertido</th>
-            <th>Moeda de conversão</th>
-            <th>Editar/Excluir</th>
-          </tr>
-          {expensesState.map((expense) => (
-            <tr key={ expense }>
-              <td>{expense.description}</td>
-              <td>{expense.tag}</td>
-              <td>{expense.method}</td>
-              <td>{`${parseFloat(expense.value)}`}</td>
-              <td>{this.filterName(expense)}</td>
-              <td>{`${this.filterExchange(expense)}`}</td>
-              <td>{this.convertedValue(expense)}</td>
-              <td>Real</td>
-              <td>
-                <button
-                  type="button"
-                  data-testid="edit-btn"
-                  onClick={ () => this.toggleForm(expense.id) }
-                >
-                  Editar
-                </button>
-                <button
-                  type="button"
-                  data-testid="delete-btn"
-                  onClick={ () => this.deleteRow(expense.id) }
-                >
-                  Excluir
-                </button>
-              </td>
+        <Table striped hover>
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Tag</th>
+              <th>Método de pagamento</th>
+              <th>Valor</th>
+              <th>Moeda</th>
+              <th>Câmbio utilizado</th>
+              <th>Valor convertido</th>
+              <th>Moeda de conversão</th>
+              <th>Editar/Excluir</th>
             </tr>
-          ))}
-        </table>
+          </thead>
+          <tbody>
+            {expensesState.map((expense) => (
+              <tr key={ expense }>
+                <td>{expense.description}</td>
+                <td>{expense.tag}</td>
+                <td>{expense.method}</td>
+                <td>{`${parseFloat(expense.value)}`}</td>
+                <td>{this.filterName(expense)}</td>
+                <td>{`${this.filterExchange(expense)}`}</td>
+                <td>{this.convertedValue(expense)}</td>
+                <td>Real</td>
+                <td>
+                  <Button
+                    size="sm"
+                    type="button"
+                    data-testid="edit-btn"
+                    onClick={ () => this.toggleForm(expense.id) }
+                  >
+                    Editar
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="danger"
+                    type="button"
+                    data-testid="delete-btn"
+                    onClick={ () => this.deleteRow(expense.id) }
+                  >
+                    Excluir
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       </div>
     );
   }

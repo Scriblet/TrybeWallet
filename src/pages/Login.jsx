@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Form, Button } from 'react-bootstrap';
 import { loginButton } from '../actions';
 
 class Login extends React.Component {
@@ -40,30 +41,40 @@ class Login extends React.Component {
   render() {
     const { email, password } = this.state;
     return (
-      <div>
-        Login Page
-        <input
-          type="email"
-          data-testid="email-input"
-          name="email"
-          value={ email }
-          onChange={ this.eventHandle }
-        />
-        <input
-          type="password"
-          data-testid="password-input"
-          name="password"
-          value={ password }
-          onChange={ this.eventHandle }
-        />
-        <button
+      <Form style={ { margin: '32px' } }>
+        <h1>Login Page</h1>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>
+            Email
+            <Form.Control
+              type="email"
+              data-testid="email-input"
+              name="email"
+              value={ email }
+              onChange={ this.eventHandle }
+            />
+          </Form.Label>
+        </Form.Group>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>
+            Password
+            <Form.Control
+              type="password"
+              data-testid="password-input"
+              name="password"
+              value={ password }
+              onChange={ this.eventHandle }
+            />
+          </Form.Label>
+        </Form.Group>
+        <Button
           type="button"
           disabled={ !this.validInputs() }
           onClick={ this.redirectWallet }
         >
           Entrar
-        </button>
-      </div>
+        </Button>
+      </Form>
     );
   }
 }

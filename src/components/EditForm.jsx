@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Form as Forms, Button } from 'react-bootstrap';
 import { editExpenses, buttonExpenses, toggleForm } from '../actions';
 
 class EditForm extends React.Component {
@@ -48,29 +49,34 @@ class EditForm extends React.Component {
     const { methodOptions, tagOptions, expense } = this.state;
     const { value, description, currency, method, tag } = expense;
     return (
-      <form className="edit-form">
-        <label htmlFor="value-input">
-          Valor editado:
-          <input
-            type="text"
-            data-testid="value-input"
-            id="value-input"
-            name="value"
-            value={ value }
-            onChange={ this.handleChange }
-          />
-        </label>
-        <label htmlFor="description-input">
-          Descrição:
-          <input
-            type="text"
-            data-testid="description-input"
-            id="description-input"
-            name="description"
-            value={ description }
-            onChange={ this.handleChange }
-          />
-          <select
+      <Forms className="edit-form">
+        <Forms.Group>
+          <Forms.Label htmlFor="value-input">
+            Valor editado:
+            <Forms.Control
+              type="text"
+              data-testid="value-input"
+              id="value-input"
+              name="value"
+              value={ value }
+              onChange={ this.handleChange }
+            />
+          </Forms.Label>
+          <Forms.Label htmlFor="description-input">
+            Descrição:
+            <Forms.Control
+              type="text"
+              data-testid="description-input"
+              id="description-input"
+              name="description"
+              value={ description }
+              onChange={ this.handleChange }
+            />
+          </Forms.Label>
+        </Forms.Group>
+        <Forms.Label>
+          <Forms.Control
+            as="select"
             className="currency-input"
             data-testid="currency-input"
             name="currency"
@@ -83,8 +89,11 @@ class EditForm extends React.Component {
                 {c}
               </option>
             ))}
-          </select>
-          <select
+          </Forms.Control>
+        </Forms.Label>
+        <Forms.Label>
+          <Forms.Control
+            as="select"
             className="method-input"
             data-testid="method-input"
             name="method"
@@ -97,8 +106,11 @@ class EditForm extends React.Component {
                 {m}
               </option>
             ))}
-          </select>
-          <select
+          </Forms.Control>
+        </Forms.Label>
+        <Forms.Label>
+          <Forms.Control
+            as="select"
             className="tag-input"
             data-testid="tag-input"
             name="tag"
@@ -111,12 +123,12 @@ class EditForm extends React.Component {
                 {t}
               </option>
             ))}
-          </select>
-        </label>
-        <button type="button" onClick={ this.buttonClick }>
+          </Forms.Control>
+        </Forms.Label>
+        <Button type="button" onClick={ this.buttonClick }>
           Editar despesa
-        </button>
-      </form>
+        </Button>
+      </Forms>
     );
   }
 }

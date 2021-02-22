@@ -29,21 +29,28 @@ class Wallet extends React.Component {
     const { email, typeForm } = this.props;
     console.log(typeForm);
     return (
-      <div className="header-wallet">
-        TrybeWallet
-        <header>
-          <img src={ logo } alt="Logo Trybe" className="logo-header" />
-          <div>
-            <p data-testid="email-field">{email}</p>
-            <p>
-              Despesa Total:
-              <span data-testid="header-currency-field">{currency}</span>
-              <span data-testid="total-field">{this.totalValue()}</span>
-            </p>
-          </div>
-        </header>
-        {typeForm ? <EditForm /> : <Form /> }
-        <WalletTable />
+      <div>
+        <div
+          className="header-wallet"
+          style={ { color: 'white', fontFamily: 'Poppins', padding: '32px' } }
+        >
+          TrybeWallet
+          <header>
+            <img src={ logo } alt="Logo Trybe" className="logo-header" />
+            <div>
+              <p data-testid="email-field">{email}</p>
+              <p>
+                Despesa Total:
+                <span data-testid="header-currency-field">{currency}</span>
+                <span data-testid="total-field">{this.totalValue()}</span>
+              </p>
+            </div>
+          </header>
+          {typeForm ? <EditForm /> : <Form />}
+        </div>
+        <div>
+          <WalletTable />
+        </div>
       </div>
     );
   }
